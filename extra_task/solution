@@ -1,0 +1,32 @@
+1.
+
+    const myFn = function (str) {
+        const arNumber = str.split('+');
+        return +arNumber[0] + +arNumber[1];
+    };
+
+2.
+
+    const myFn = str => {
+        const arNumber = str.split('+');
+        return arNumber.reduce(function(acc, cur){
+        return +acc + +cur;
+        });
+    };
+
+console.log(myFn('1234567890123456789012345678901234567890123456789012345678901234567890+1234567890123456789012345678901234567890123456789012345678901234567890'));
+
+3.
+
+<?php
+
+function myFn(string $str) {
+    $arNumber = explode('+', $str);
+    $sum = 0;
+    for ($i = 0; $i < count($arNumber); $i++){
+        $sum += +$arNumber[$i];
+    }
+    return $sum;
+};
+
+die(myFn('1234567890123456789012345678901234567890123456789012345678901234567890+1234567890123456789012345678901234567890123456789012345678901234567890'));
