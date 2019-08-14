@@ -1,34 +1,19 @@
-const onPageLoadedX = function() {
 
-    const myFn = str => {
-        const arNumber = str.split('+');
-        const arFirst = arNumber[0].split('');
-        const arSecond = arNumber[1].split('');
-        let arResult = [];
-        if (arFirst.length >= arSecond.length) {
-            addArrayTogether(arFirst, arSecond, arResult);
-        } else {
-            addArrayTogether(arSecond, arFirst, arResult);
-        }
-        return arResult.reverse().join('');
-    };
-
-    const addArrayTogether = (arOne, arTwo, arResult) => {
-        for (let i = arOne.length - 1, j = 1; i > -1; i--, j++) {
-            if (j <= arTwo.length) {
-                if ((+arOne[i] + +arTwo[(arTwo.length - j)]) >= 10) {
-                    arResult.push((+arOne[i] + +arTwo[(arTwo.length - j)]) - 10);
-                    arOne[(i - 1)] = +arOne[(i - 1)] + 1;
-                } else {
-                    arResult.push(+arOne[i] + +arTwo[(arTwo.length - j)]);
-                }
-            } else {
-                arResult.push(+arOne[i]);
-            }
-        }
-        return arResult;
-    };
-
+const myFn = str => {
+    const arNumber = str.split('+');
+    const arFirst = arNumber[0];
+    const arSecond = arNumber[1];
+    let rest = 0;
+    let result = '';
+    for (let i = arFirst.length - 1, j = arSecond.length - 1; i >= 0 || j >= 0; i--, j--) {
+        const n1 = +arFirst[i] || 0;
+        const n2 = +arSecond[j] || 0;
+        const summ = n1 + n2 + rest;
+        rest = Math.floor(summ / 10);
+        result = summ % 10 + result;
+    }
+    return rest ? rest + result : result;
+};
 
 console.log(myFn('1234567890123456789012345678901234567890123456789012345678901234567890+1234567890123456789012345678901234567890123456789012345678901234567890'));
 
